@@ -1,15 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import * as S from "./styles";
 import Button from "../../components/Button";
 import { useNavigation } from "@react-navigation/native";
+import { AuthContext } from '../../contexts/auth';
+
 
 export default function SignIn() {
 
   const navigation = useNavigation();
 
+  const { user } = useContext(AuthContext);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState();
   const [title, setTitle] = useState("Entrar");
+
+
+  const executeLogin = () => {
+    alert('aqui')
+  }
 
 
   return (
@@ -30,7 +39,7 @@ export default function SignIn() {
         />
       </S.AreaInputs>
       <S.AreaButton>
-        <Button title={title} />
+        <Button executeFunction={executeLogin} title={title} />
       </S.AreaButton>
       <S.AreaRegister onPress={() => navigation.navigate('Cadastro')}>
         <S.Register>Cadastre-se</S.Register>

@@ -44,7 +44,7 @@ border-bottom-right-radius: 10px;
 export const AreaButton = styled.View`
 width: 100%;
 height: 60px;
-margin-top: 30px;
+margin-top: 80px;
 align-items: center;
 justify-content: center;
 padding-vertical: 5px;

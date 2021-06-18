@@ -1,17 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import * as S from "./styles";
 import Button from "../../components/Button";
 import { useNavigation } from "@react-navigation/native";
+import { AuthContext } from "../../contexts/auth";
 
 
 export default function Register() {
 
   const navigation = useNavigation();
+
+  const { signUp } = useContext(AuthContext);
   
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState();
   const [registerPassword, setRegisterPassword] = useState();
   const [title, setTitle] = useState("Cadastrar");
+
+
+  const executeRegister = () => {
+    signUp();
+  }
+
 
   return (
     <S.Background>
@@ -19,6 +29,11 @@ export default function Register() {
         <S.Logo source={require("../../assets/Logo.png")} />
       </S.AreaLogo>
       <S.AreaInputs>
+        <S.InputEmail
+          onChangeText={(t) => setName(t)}
+          placeholder="Nome"
+          value={name}
+        />
         <S.InputEmail
           onChangeText={(t) => setEmail(t)}
           placeholder="E-mail"
@@ -31,7 +46,7 @@ export default function Register() {
         />
       </S.AreaInputs>
       <S.AreaButton>
-        <Button title={title} />
+        <Button executeFunction={executeRegister} title={title} />
       </S.AreaButton>
       <S.AreaBack onPress={() => navigation.goBack()}>
         <S.Back>Voltar</S.Back>
