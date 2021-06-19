@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { ScrollView } from "react-native";
 import * as S from "./styles";
 import Button from "../../components/Button";
 import { useNavigation } from "@react-navigation/native";
@@ -9,15 +10,15 @@ export default function SignIn() {
 
   const navigation = useNavigation();
 
-  const { user } = useContext(AuthContext);
+  const { user, signIn } = useContext(AuthContext);
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState();
+  const [email, setEmail] = useState('maxsoncoelho@gmail.com');
+  const [password, setPassword] = useState('mixmax009');
   const [title, setTitle] = useState("Entrar");
 
 
-  const executeLogin = () => {
-    alert('aqui')
+  const executeLogin = async () => {
+     signIn(email, password);
   }
 
 
@@ -26,24 +27,27 @@ export default function SignIn() {
       <S.AreaLogo>
         <S.Logo source={require("../../assets/Logo.png")} />
       </S.AreaLogo>
-      <S.AreaInputs>
-        <S.InputEmail
-          onChangeText={(t) => setEmail(t)}
-          placeholder="E-mail"
-          value={email}
-        />
-        <S.InputPassword
-          onChangeText={(t) => setPassword(t)}
-          placeholder="Senha"
-          value={password}
-        />
-      </S.AreaInputs>
-      <S.AreaButton>
-        <Button executeFunction={executeLogin} title={title} />
-      </S.AreaButton>
-      <S.AreaRegister onPress={() => navigation.navigate('Cadastro')}>
-        <S.Register>Cadastre-se</S.Register>
-      </S.AreaRegister>
+      <ScrollView>
+        <S.AreaInputs>
+          <S.InputEmail
+            onChangeText={(t) => setEmail(t)}
+            placeholder="E-mail"
+            value={email}
+          />
+          <S.InputPassword
+            onChangeText={(t) => setPassword(t)}
+            placeholder="Senha"
+            value={password}
+            secureTextEntry={true}
+          />
+        </S.AreaInputs>
+        <S.AreaButton>
+          <Button executeFunction={executeLogin} title={title} />
+        </S.AreaButton>
+        <S.AreaRegister onPress={() => navigation.navigate('Cadastro')}>
+          <S.Register>Cadastre-se</S.Register>
+        </S.AreaRegister>
+        </ScrollView>
       <S.Footer>
         <S.Forgot>Esqueci minha senha</S.Forgot>
       </S.Footer>

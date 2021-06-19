@@ -11,15 +11,14 @@ export default function Register() {
 
   const { signUp } = useContext(AuthContext);
   
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState();
-  const [registerPassword, setRegisterPassword] = useState();
+  const [name, setName] = useState("Maxson");
+  const [email, setEmail] = useState("maxson@gmail.com");
+  const [password, setPassword] = useState('mixmax009');
   const [title, setTitle] = useState("Cadastrar");
 
 
   const executeRegister = () => {
-    signUp();
+    signUp(email, password, name);
   }
 
 
@@ -29,7 +28,7 @@ export default function Register() {
         <S.Logo source={require("../../assets/Logo.png")} />
       </S.AreaLogo>
       <S.AreaInputs>
-        <S.InputEmail
+        <S.InputNome
           onChangeText={(t) => setName(t)}
           placeholder="Nome"
           value={name}
@@ -43,6 +42,7 @@ export default function Register() {
           onChangeText={(t) => setPassword(t)}
           placeholder="Senha"
           value={password}
+          secureTextEntry={true}
         />
       </S.AreaInputs>
       <S.AreaButton>

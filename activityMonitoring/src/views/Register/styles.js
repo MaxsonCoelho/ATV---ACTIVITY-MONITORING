@@ -23,6 +23,15 @@ height: 150px;
 align-items: center;
 `
 
+export const InputNome = styled.TextInput`
+background-color: #fff;
+width: 70%;
+height: 45px;
+margin-top: 15px;
+border-top-left-radius: 10px;
+border-bottom-right-radius: 10px;
+`
+
 export const InputEmail = styled.TextInput`
 background-color: #fff;
 width: 70%;
@@ -36,7 +45,7 @@ export const InputPassword = styled.TextInput`
 background-color: #fff;
 width: 70%;
 height: 45px;
-margin-top: 30px;
+margin-top: 15px;
 border-top-left-radius: 10px;
 border-bottom-right-radius: 10px;
 `

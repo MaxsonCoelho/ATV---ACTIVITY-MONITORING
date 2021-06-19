@@ -1,13 +1,14 @@
 {
   "project_info": {
     "project_number": "845213216345",
+    "firebase_url": "https://activity-monitoring-67f88-default-rtdb.firebaseio.com",
     "project_id": "activity-monitoring-67f88",
     "storage_bucket": "activity-monitoring-67f88.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:845213216345:android:eb85d6ced797de32764b48",
+        "mobilesdk_app_id": "1:845213216345:android:42398778d3c943ea764b48",
         "android_client_info": {
           "package_name": "com.activitymonitoring"
         }
