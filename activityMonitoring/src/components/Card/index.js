@@ -23,10 +23,10 @@ export default function Card() {
                             <S.Data>
                                 <S.AreaData>
                                     <S.TitleData>Atividade: {item.name}</S.TitleData>
-                                    <S.TitleData>Atividade: {item.description}</S.TitleData>
-                                    <S.TitleData>Atividade: {item.responsible}</S.TitleData>
-                                    <S.TitleData>Atividade: {item.createdAt}</S.TitleData>
-                                    <S.TitleData>Atividade: {item.modificatedAt}</S.TitleData>
+                                    <S.TitleData>Descrição: {item.description}</S.TitleData>
+                                    <S.TitleData>Responsável: {item.responsible}</S.TitleData>
+                                    <S.TitleData>Criação: {item.createdAt}</S.TitleData>
+                                    <S.TitleData>Modificado: {item.modificatedAt}</S.TitleData>
                                 </S.AreaData>
                                 <S.AreaButton>
                                     <S.Button onPress={() => navigation.navigate('Detalhes e Atualização', {

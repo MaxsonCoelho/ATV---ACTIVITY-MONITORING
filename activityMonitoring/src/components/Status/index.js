@@ -6,8 +6,11 @@ import { ActivityContext } from '../../contexts/activity';
 
 export default function Status({listStatus}) {
 
-    const { textInput, setTextInput, activityFilter } = useContext(ActivityContext);
+    const { status, setStatus } = useContext(ActivityContext);
     
+    const executeStatus = (item) => {
+        setStatus(item);
+    }
 
     return (
         <S.Background>
@@ -17,7 +20,7 @@ export default function Status({listStatus}) {
                 showsHorizontalScrollIndicator={false}
                 renderItem={({item}) => {
                     return (
-                        <S.Button >
+                        <S.Button onPress={() => executeStatus(item.nome)}>
                             <S.Title>{item.nome}</S.Title>
                         </S.Button>
                     )

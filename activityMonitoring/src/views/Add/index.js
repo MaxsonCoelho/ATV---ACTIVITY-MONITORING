@@ -8,30 +8,43 @@ import Status from "../../components/Status";
 import Button from "../../components/Button";
 
 export default function Add() {
-  
+
   const navigation = useNavigation();
 
-  const { dataActivity, activityEdit, arrayStatus } = useContext(ActivityContext);
+  const {
+    arrayStatus,
+    activityAdd,
+    activity,
+    setActivity,
+    description,
+    setDescription,
+    responsible,
+    setResponsable,
+    createdActivity,
+    setCreatedActivity,
+    status
+  } = useContext(ActivityContext);
 
-  const [title, setTitle] = useState("Detalhes e Atualização");
+  const [title, setTitle] = useState("Adicionar Atividade");
   const [buttonTitle, setButtonTitle] = useState("Salvar");
-  const [activity, setActivity] = useState("");
-  const [description, setDescription] = useState("");
-  const [responsible, setResponsable] = useState("");
   const [arrayLimitStatus, setArrayLimitStatus] = useState([]);
 
   // const executeUpdate = () => {
   //   activityEdit();
   // }
 
+  const executeAdd = () => {
+    activityAdd(activity, description, responsible, createdActivity, status);
+    navigation.navigate('Home')
+  };
 
   useEffect(() => {
     const limitStatus = () => {
-      const status = arrayStatus.slice(2)
-      setArrayLimitStatus(status)
-    }
+      const status = arrayStatus.slice(0, 2);
+      setArrayLimitStatus(status);
+    };
     limitStatus();
-  }, [])
+  }, []);
 
   return (
     <S.Background>
@@ -63,13 +76,11 @@ export default function Add() {
               value={responsible}
             />
           </S.AreaInputActivity>
-          <S.TextInputActivity>
-            Data de criação: 
-          </S.TextInputActivity>
+          <S.TextInputActivity>Data de criação: {`${new Date().toLocaleDateString()} - ${new Date().toLocaleTimeString()}`}</S.TextInputActivity>
         </S.AreaInputs>
         <Status listStatus={arrayLimitStatus} />
         <S.AreaButton>
-          <Button title={buttonTitle} />
+          <Button executeFunction={() => executeAdd()} title={buttonTitle} />
         </S.AreaButton>
         <S.ButtonGoBack onPress={() => navigation.goBack()}>
           <S.GoBack source={require("../../assets/goBack.png")} />

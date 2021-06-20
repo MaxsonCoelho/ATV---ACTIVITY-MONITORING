@@ -11,7 +11,7 @@ export default function SearchInput()  {
         <S.Background>
             <S.AreaInput>
                 <S.Input onChangeText={(t) => setTextInput(t)} 
-                placeholder="Digite uma atividade ou responsável"
+                placeholder="Atividade ou responsável"
                 value={textInput} />
                 <S.ButtonSearch onPress={activityFilter} >
                     <S.Search source={require('../../assets/Luneta.png')}/>

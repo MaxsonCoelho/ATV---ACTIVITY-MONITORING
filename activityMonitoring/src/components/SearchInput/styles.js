@@ -12,7 +12,7 @@ flex-direction: row;
 export const AreaInput = styled.View`
 flex: 1;
 flex-direction: row;
-justify-content: center;
+justify-content: space-between;
 align-items: center;
 border-top-right-radius: 10px;
 border-bottom-left-radius: 10px;
@@ -21,7 +21,6 @@ background: #fff;
 `
 
 export const Input = styled.TextInput`
-flex:1;
 padding-top: 10px;
 padding-right: 10px;
 padding-bottom: 10px;
