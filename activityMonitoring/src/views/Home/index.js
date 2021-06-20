@@ -2,24 +2,23 @@ import React, { useState, useContext } from "react";
 import { Button } from "react-native";
 import * as S from "./styles";
 import { AuthContext } from "../../contexts/auth";
+import { ActivityContext } from "../../contexts/activity";
 import Header from "../../components/Header";
 import SearchInput from "../../components/SearchInput";
 import Status from "../../components/Status";
 import Card from "../../components/Card";
+import { useNavigation } from "@react-navigation/native";
 
 
 export default function Home() {
 
+  const navigation = useNavigation();
+
   const { signOut } = useContext(AuthContext);
+  const { arrayStatus } = useContext(ActivityContext);
   
   const [titleHeader, setTitleHeader] = useState('Busca de atividades');
-  const [arrayStatus, setArrayStatus] = useState([
-    {id:0, nome: 'Pendente'},
-    {id:1, nome: 'Em Andamento'},
-    {id:2, nome: 'Finalizada'},
-    {id:3, nome: 'Cancelada'},
-  ])
-
+  
 
   return (
     <S.Background>
@@ -28,7 +27,7 @@ export default function Home() {
       <Status listStatus={arrayStatus} />
       <Card />
       <S.AreaButtonAdd>
-        <S.Button>
+        <S.Button onPress={() => navigation.navigate('Adicionar Atividade')}>
           <S.TitleButton>+</S.TitleButton>
         </S.Button>
       </S.AreaButtonAdd>

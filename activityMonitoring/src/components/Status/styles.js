@@ -10,10 +10,11 @@ margin-vertical: 20px;
 export const Button = styled.TouchableOpacity`
 justify-content: center;
 align-items: center;
-border-radius: 5px;
 background-color: #805BCF;
 padding: 5px;
 margin-horizontal: 5px;
+border-bottom-left-radius: 10px;
+border-top-right-radius: 10px;
 `
 
 export const Title = styled.Text`

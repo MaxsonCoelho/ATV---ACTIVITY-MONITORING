@@ -9,10 +9,11 @@ flex-direction: column;
 export const Card = styled.View`
 flex: 1;
 width: 85%;
-border-radius: 5px;
 background-color: #fff;
 margin-top: 15px;
 align-self: center;
+border-top-right-radius: 10px;
+border-bottom-left-radius: 10px;
 `
 
 export const AreaData = styled.View`
@@ -61,13 +62,13 @@ flex: 1;
 width: 37%;
 justify-content: center;
 align-items: center;
-border-radius: 5px;
+border-bottom-left-radius: 15px;
+border-top-right-radius: 15px;
 margin-left: 10px;
 background-color: #805BCF;
 `
 
 export const TitleStatus = styled.Text`
-
 font-size: 12px;
 font-weight: bold;
 padding: 5px;

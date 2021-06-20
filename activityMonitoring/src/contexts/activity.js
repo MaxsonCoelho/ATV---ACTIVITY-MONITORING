@@ -12,22 +12,35 @@ export default function ActivityProvider({ children }){
     const [dataActivity, setDataActivity] = useState([
         {
             id: 0, 
-            nome: 'Criar exercícios de matemática',
-            descricao: 'Fazer exercícos de soma, subtração, multiplicação, divisão',
-            responsavel: 'Pedro',
+            name: 'Criar exercícios de matemática',
+            description: 'Fazer exercícos de soma, subtração, multiplicação, divisão',
+            responsible: 'Pedro',
             createdAt: `${new Date().toLocaleDateString()} - ${new Date().toLocaleTimeString()}`,
             modificatedAt: `${new Date().toLocaleDateString()} - ${new Date().toLocaleTimeString()}`,
             status: 'Pendente'
         }
     ]);
+    const [arrayStatus, setArrayStatus] = useState([
+        {id:0, nome: 'Pendente'},
+        {id:1, nome: 'Em Andamento'},
+        {id:2, nome: 'Finalizada'},
+        {id:3, nome: 'Cancelada'},
+      ])
 
     const activityFilter = async () => {
 
     }
 
+
+    const activityEdit = async () => {
+
+    }
+
+
     return (
         <ActivityContext.Provider value={{ activityFilter, textInput,
-        setTextInput, dataActivity }}>
+        setTextInput, dataActivity , activityEdit, arrayStatus, 
+        setDataActivity }}>
             {children}
         </ActivityContext.Provider>
     );

@@ -14,7 +14,9 @@ flex: 1;
 flex-direction: row;
 justify-content: center;
 align-items: center;
-border-radius: 10px;
+border-top-right-radius: 10px;
+border-bottom-left-radius: 10px;
+padding-left: 5px;
 background: #fff;
 `
 

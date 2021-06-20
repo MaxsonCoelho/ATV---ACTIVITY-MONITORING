@@ -2,9 +2,12 @@ import React, { useContext } from 'react';
 import { FlatList } from 'react-native';
 import * as S from './styles';
 import { ActivityContext } from '../../contexts/activity';
+import { useNavigation } from '@react-navigation/native';
 
 
 export default function Card() {
+
+    const navigation = useNavigation();
 
     const { textInput, setTextInput, 
             activityFilter, dataActivity } = useContext(ActivityContext);
@@ -12,7 +15,6 @@ export default function Card() {
     
     return (
         <S.Background>
-            {console.log(dataActivity)}
             <FlatList 
                 data={dataActivity}
                 renderItem={({item}) => {
@@ -20,14 +22,16 @@ export default function Card() {
                         <S.Card>
                             <S.Data>
                                 <S.AreaData>
-                                    <S.TitleData>Atividade: {item.nome}</S.TitleData>
-                                    <S.TitleData>Atividade: {item.descricao}</S.TitleData>
-                                    <S.TitleData>Atividade: {item.responsavel}</S.TitleData>
+                                    <S.TitleData>Atividade: {item.name}</S.TitleData>
+                                    <S.TitleData>Atividade: {item.description}</S.TitleData>
+                                    <S.TitleData>Atividade: {item.responsible}</S.TitleData>
                                     <S.TitleData>Atividade: {item.createdAt}</S.TitleData>
                                     <S.TitleData>Atividade: {item.modificatedAt}</S.TitleData>
                                 </S.AreaData>
                                 <S.AreaButton>
-                                    <S.Button>
+                                    <S.Button onPress={() => navigation.navigate('Detalhes e Atualização', {
+                                        item: item
+                                        })}>
                                         <S.ImageButton source={require('../../assets/touch.png')}/>
                                     </S.Button>
                                 </S.AreaButton>

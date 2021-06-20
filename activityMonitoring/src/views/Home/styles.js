@@ -7,7 +7,7 @@ background-color: #CEE9F1;
 `
 
 export const AreaButtonAdd = styled.View`
-flex: 0.6;
+margin-bottom: 45px;
 align-items: center;
 justify-content: center;
 `
@@ -16,9 +16,10 @@ export const Button = styled.TouchableOpacity`
 width: 50px;
 height: 50px;
 background-color: #805BCF;
-border-radius: 50px;
 align-items: center;
 justify-content: center;
+border-top-right-radius: 10px;
+border-bottom-left-radius: 10px;
 `
 
 export const TitleButton = styled.Text`
