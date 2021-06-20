@@ -3,48 +3,57 @@ import * as S from "./styles";
 import { ScrollView } from "react-native";
 import { ActivityContext } from "../../contexts/activity";
 import { useNavigation } from "@react-navigation/native";
+import firestore from "@react-native-firebase/firestore";
 import Header from "../../components/Header";
 import Status from "../../components/Status";
 import Button from "../../components/Button";
+import uuid from "react-native-uuid";
 
 export default function Add() {
-
   const navigation = useNavigation();
 
-  const {
-    arrayStatus,
-    activityAdd,
-    activity,
-    setActivity,
-    description,
-    setDescription,
-    responsible,
-    setResponsable,
-    createdActivity,
-    setCreatedActivity,
-    status
-  } = useContext(ActivityContext);
+  const { status, setStatus, arrayStatus, activitiesList } =
+    useContext(ActivityContext);
 
   const [title, setTitle] = useState("Adicionar Atividade");
   const [buttonTitle, setButtonTitle] = useState("Salvar");
-  const [arrayLimitStatus, setArrayLimitStatus] = useState([]);
+  const [activity, setActivity] = useState("teste");
+  const [description, setDescription] = useState("teste");
+  const [responsible, setResponsable] = useState("teste");
+  const [createdActivity, setCreatedActivity] = useState(
+    `${new Date().toLocaleDateString()} - ${new Date().toLocaleTimeString()}`
+  );
 
-  // const executeUpdate = () => {
-  //   activityEdit();
-  // }
-
-  const executeAdd = () => {
-    activityAdd(activity, description, responsible, createdActivity, status);
-    navigation.navigate('Home')
+  const activityAdd = () => {
+    if (activity == "") {
+      alert("Digite o nome da Atividade");
+    } else if (description == "") {
+      alert("Digite uma descrição");
+    } else if (responsible == "") {
+      alert("Digite um responsável");
+    } else {
+      const activityCollection = firestore().collection("Activity");
+      activityCollection
+        .add({
+          id: uuid.v4(),
+          name: activity,
+          description: description,
+          responsible: responsible,
+          createdAt: createdActivity,
+          modificatedAt: "Sem modificações",
+          status: status,
+        })
+        .then(() => {
+          setActivity("");
+          setDescription("");
+          setResponsable("");
+          setStatus("");
+          activitiesList();
+          navigation.navigate("Home");
+        })
+        .catch((e) => console.error("Error found: ", e));
+    }
   };
-
-  useEffect(() => {
-    const limitStatus = () => {
-      const status = arrayStatus.slice(0, 2);
-      setArrayLimitStatus(status);
-    };
-    limitStatus();
-  }, []);
 
   return (
     <S.Background>
@@ -76,11 +85,14 @@ export default function Add() {
               value={responsible}
             />
           </S.AreaInputActivity>
-          <S.TextInputActivity>Data de criação: {`${new Date().toLocaleDateString()} - ${new Date().toLocaleTimeString()}`}</S.TextInputActivity>
+          <S.TextInputActivity>
+            Data de criação:{" "}
+            {`${new Date().toLocaleDateString()} - ${new Date().toLocaleTimeString()}`}
+          </S.TextInputActivity>
         </S.AreaInputs>
-        <Status listStatus={arrayLimitStatus} />
+        <Status listStatus={arrayStatus} />
         <S.AreaButton>
-          <Button executeFunction={() => executeAdd()} title={buttonTitle} />
+          <Button executeFunction={activityAdd} title={buttonTitle} />
         </S.AreaButton>
         <S.ButtonGoBack onPress={() => navigation.goBack()}>
           <S.GoBack source={require("../../assets/goBack.png")} />

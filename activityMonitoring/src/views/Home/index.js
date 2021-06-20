@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { View, Text } from "react-native";
 import { Button } from "react-native";
 import * as S from "./styles";
 import { AuthContext } from "../../contexts/auth";
@@ -15,16 +16,30 @@ export default function Home() {
   const navigation = useNavigation();
 
   const { signOut } = useContext(AuthContext);
-  const { arrayStatus } = useContext(ActivityContext);
+  const { arrayStatus, activitiesList, dataActivity } = useContext(ActivityContext);
   
   const [titleHeader, setTitleHeader] = useState('Busca de atividades');
   
+  const executeReload = () => {
+    activitiesList();
+  }
+    
 
   return (
     <S.Background>
       <Header title={titleHeader}/>
       <SearchInput />
-      <Status listStatus={arrayStatus} />
+      <Status />
+      <S.AreaReload onPress={() => executeReload()}>
+        <S.Reload source={require('../../assets/Reload.png')}/>
+      </S.AreaReload>
+      {dataActivity.length <= 0 &&
+        (
+          <View style={{alignItems:'center', justifyContent:'center', height:60}}>
+            <Text style={{fontSize: 16, color:"#000", fontWeight:'bold'}}>No momento não existe nenhuma tarefa</Text>
+          </View>
+        )
+      }
       <Card />
       <S.AreaButtonAdd>
         <S.Button onPress={() => navigation.navigate('Adicionar Atividade')}>

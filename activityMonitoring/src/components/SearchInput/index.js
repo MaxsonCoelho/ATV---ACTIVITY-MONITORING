@@ -7,11 +7,12 @@ export default function SearchInput()  {
 
     const { textInput, setTextInput, activityFilter } = useContext(ActivityContext);
 
+
     return (
         <S.Background>
             <S.AreaInput>
                 <S.Input onChangeText={(t) => setTextInput(t)} 
-                placeholder="Atividade ou responsável"
+                placeholder="Atividade"
                 value={textInput} />
                 <S.ButtonSearch onPress={activityFilter} >
                     <S.Search source={require('../../assets/Luneta.png')}/>

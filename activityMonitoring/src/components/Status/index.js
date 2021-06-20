@@ -4,18 +4,19 @@ import * as S from './styles';
 import { ActivityContext } from '../../contexts/activity';
 
 
-export default function Status({listStatus}) {
+export default function Status({}) {
 
-    const { status, setStatus } = useContext(ActivityContext);
+    const { status, setStatus, filterStatus, arrayStatus } = useContext(ActivityContext);
     
-    const executeStatus = (item) => {
+    const executeStatus = async (item) => {
+        filterStatus(item)
         setStatus(item);
     }
 
     return (
         <S.Background>
             <FlatList 
-                data={listStatus}
+                data={arrayStatus}
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}
                 renderItem={({item}) => {

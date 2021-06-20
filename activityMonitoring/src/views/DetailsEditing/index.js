@@ -3,12 +3,14 @@ import * as S from "./styles";
 import { ScrollView } from "react-native";
 import { ActivityContext } from "../../contexts/activity";
 import { useNavigation, useRoute } from "@react-navigation/native";
+import firestore from "@react-native-firebase/firestore";
 import Header from "../../components/Header";
 import Status from "../../components/Status";
 import Button from "../../components/Button";
 
 export default function DetailsEditing() {
-  const { dataActivity, activityEdit, arrayStatus } = useContext(ActivityContext);
+    
+    const { dataActivity, setStatus, status, activitiesList } = useContext(ActivityContext);
 
   const navigation = useNavigation();
   const route = useRoute();
@@ -19,10 +21,40 @@ export default function DetailsEditing() {
   const [activity, setActivity] = useState(itemActivity.name);
   const [description, setDescription] = useState(itemActivity.description);
   const [responsible, setResponsable] = useState(itemActivity.responsible);
+  const [idActivity, setIdActivity] = useState(`${itemActivity.id}`);
+  const [modificatedAt, setModificatedAt] = useState(
+    `${new Date().toLocaleDateString()} - ${new Date().toLocaleTimeString()}`
+  );
 
-  // const executeUpdate = () => {
-  //   activityEdit();
-  // }
+
+  const activityEdit = () => {
+    console.log(idActivity)
+    console.log(activity)
+    console.log(responsible)
+    console.log(responsible)
+    console.log(modificatedAt)
+    console.log(status)
+    const activityCollectionEdit = firestore().collection("Activity").doc(idActivity);
+    activityCollectionEdit
+      .set({
+        name: activity,
+        description: description,
+        responsible: responsible,
+        modificatedAt: modificatedAt,
+        status: status
+      })
+      .then((response) => {
+        console.log(response);
+        setActivity("");
+        setDescription("");
+        setResponsable("");
+        setStatus("");
+        activitiesList();
+        navigation.navigate('Home');
+      })
+      .catch((e) => console.error("Error found: ", e));
+  };
+
 
   return (
     <S.Background>
@@ -58,9 +90,9 @@ export default function DetailsEditing() {
             Data de criação: {itemActivity.createdAt}
           </S.TextInputActivity>
         </S.AreaInputs>
-        <Status listStatus={arrayStatus} />
+        <Status/>
         <S.AreaButton>
-          <Button title={buttonTitle} />
+          <Button executeFunction={() => activityEdit()} title={buttonTitle} />
         </S.AreaButton>
         <S.ButtonGoBack onPress={() => navigation.goBack()}>
           <S.GoBack source={require("../../assets/goBack.png")} />

@@ -6,6 +6,16 @@ flex:1;
 background-color: #CEE9F1;
 `
 
+export const AreaReload = styled.TouchableOpacity`
+width: 100%;
+`
+
+export const Reload = styled.Image`
+margin-left: 30px;
+width: 30px;
+height: 30px;
+`
+
 export const AreaButtonAdd = styled.View`
 margin-bottom: 45px;
 align-items: center;
@@ -13,6 +23,7 @@ justify-content: center;
 `
 
 export const Button = styled.TouchableOpacity`
+margin-top: 15px;
 width: 50px;
 height: 50px;
 background-color: #805BCF;

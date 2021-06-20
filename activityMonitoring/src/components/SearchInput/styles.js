@@ -17,10 +17,11 @@ align-items: center;
 border-top-right-radius: 10px;
 border-bottom-left-radius: 10px;
 padding-left: 5px;
-background: #fff;
+background-color: #fff;
 `
 
 export const Input = styled.TextInput`
+width: 75%;
 padding-top: 10px;
 padding-right: 10px;
 padding-bottom: 10px;
