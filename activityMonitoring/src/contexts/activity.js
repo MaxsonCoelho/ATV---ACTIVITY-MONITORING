@@ -27,8 +27,6 @@ export default function ActivityProvider({ children }) {
     { id: 3, nome: "Cancelada" },
   ]);
 
-  
-
   const activityFilter = () => {
     setLoading(true);
     if (textInput == "") {
@@ -43,8 +41,6 @@ export default function ActivityProvider({ children }) {
         .then((querySnapshot) => {
           const array = [];
           querySnapshot.forEach((doc) => {
-            console.log(doc);
-
             array.push({
               ...doc.data(),
             });
@@ -130,8 +126,16 @@ export default function ActivityProvider({ children }) {
       .then((querySnapshot) => {
         const array = [];
         querySnapshot.forEach((doc) => {
+          const { name, description, responsible, createdAtActivity, modificatedAt, status } = doc.data();
           array.push({
-            ...doc.data(),
+            id: doc.id,
+            doc,
+            name,
+            description,
+            responsible,
+            createdActivity,
+            modificatedAt,
+            status
           });
         });
         setDataActivity(array);
