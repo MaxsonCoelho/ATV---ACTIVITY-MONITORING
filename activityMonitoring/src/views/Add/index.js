@@ -35,19 +35,19 @@ export default function Add() {
     } else if (status == "") {
       alert("Escolha um status");
     } else {
-      firestore()
-      .collection('Activity')
-      .get()
-      .then(querySnapshot => {
-        querySnapshot.forEach(documentSnapshot => {
-          console.log('User ID: ', documentSnapshot.id);
-          setIdActivity(documentSnapshot.id)
-        });
-      });
+      // firestore()
+      // .collection('Activity')
+      // .get()
+      // .then(querySnapshot => {
+      //   querySnapshot.forEach(documentSnapshot => {
+      //     console.log('User ID: ', documentSnapshot.id);
+      //     setIdActivity(documentSnapshot.id)
+      //   });
+      // });
       const activityCollection = firestore().collection("Activity");
       activityCollection
         .add({
-          id: idActivity,
+          id: uuid.v4(),
           name: activity,
           description: description,
           responsible: responsible,
