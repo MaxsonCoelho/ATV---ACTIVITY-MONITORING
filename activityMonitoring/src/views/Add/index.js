@@ -23,6 +23,7 @@ export default function Add() {
   const [createdActivity, setCreatedActivity] = useState(
     `${new Date().toLocaleDateString()} - ${new Date().toLocaleTimeString()}`
   );
+  const [idActivity, setIdActivity] = useState("")
 
   const activityAdd = () => {
     if (activity == "") {
@@ -31,11 +32,22 @@ export default function Add() {
       alert("Digite uma descrição");
     } else if (responsible == "") {
       alert("Digite um responsável");
+    } else if (status == "") {
+      alert("Escolha um status");
     } else {
+      firestore()
+      .collection('Activity')
+      .get()
+      .then(querySnapshot => {
+        querySnapshot.forEach(documentSnapshot => {
+          console.log('User ID: ', documentSnapshot.id);
+          setIdActivity(documentSnapshot.id)
+        });
+      });
       const activityCollection = firestore().collection("Activity");
       activityCollection
         .add({
-          id: uuid.v4(),
+          id: idActivity,
           name: activity,
           description: description,
           responsible: responsible,

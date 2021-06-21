@@ -21,38 +21,40 @@ export default function DetailsEditing() {
   const [activity, setActivity] = useState(itemActivity.name);
   const [description, setDescription] = useState(itemActivity.description);
   const [responsible, setResponsable] = useState(itemActivity.responsible);
-  const [idActivity, setIdActivity] = useState(`${itemActivity.id}`);
+  const [createdAt, setCreatedAt] = useState(itemActivity.createdAt);
+  const [idActivity, setIdActivity] = useState(itemActivity.id);
   const [modificatedAt, setModificatedAt] = useState(
     `${new Date().toLocaleDateString()} - ${new Date().toLocaleTimeString()}`
   );
 
 
   const activityEdit = () => {
-    console.log(idActivity)
-    console.log(activity)
-    console.log(responsible)
-    console.log(responsible)
-    console.log(modificatedAt)
-    console.log(status)
-    const activityCollectionEdit = firestore().collection("Activity").doc(idActivity);
-    activityCollectionEdit
-      .set({
+
+    const activityCollectionEdit = firestore().doc(`Activity/${idActivity}`);
+    return firestore().runTransaction(async transaction => {
+      const postSnapshot = await transaction.get(activityCollectionEdit);
+
+      if(!postSnapshot.exists){
+        alert('Esta Atividade Não Existe')
+      }
+
+      await transaction.update(activityCollectionEdit, {
         name: activity,
         description: description,
         responsible: responsible,
         modificatedAt: modificatedAt,
         status: status
-      })
-      .then((response) => {
-        console.log(response);
-        setActivity("");
-        setDescription("");
-        setResponsable("");
-        setStatus("");
-        activitiesList();
-        navigation.navigate('Home');
-      })
-      .catch((e) => console.error("Error found: ", e));
+      });
+    }).then((response) => {
+      console.log(response);
+      setActivity("");
+      setDescription("");
+      setResponsable("");
+      setStatus("");
+      activitiesList();
+      navigation.navigate('Home');
+    })
+    .catch((e) => console.error("Error found: ", e));
   };
 
 
@@ -87,7 +89,7 @@ export default function DetailsEditing() {
             />
           </S.AreaInputActivity>
           <S.TextInputActivity>
-            Data de criação: {itemActivity.createdAt}
+            Data de criação: {createdAt}
           </S.TextInputActivity>
         </S.AreaInputs>
         <Status/>
